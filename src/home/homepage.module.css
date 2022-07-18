@@ -1,0 +1,26 @@
+.homeBg{
+    
+}
+
+.triangle{
+  width: 0;
+  height: 0;
+  border: 300px solid #EFFFFD;
+  border-top: 0;
+  border-left: 0;
+  border-right: 100vw solid #42C2FF;
+}
+
+.formSection{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10rem;
+    background-color: #EFFFFD;
+}
+
+.flightGif{
+    max-width: 500px;
+    max-height: 500px;
+    position: absolute;
+    bottom: 10px;
+}
