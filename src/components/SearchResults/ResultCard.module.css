@@ -1,0 +1,33 @@
+.card {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+	border: 2px solid #e5e5e5;
+	border-radius: 10px;
+	box-shadow: 0.5rem 0.5rem 0.5rem #d8d8d8;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+.cardHeader {
+	background-color: #0078aa;
+	color: #e5e5e5;
+	text-align: center;
+}
+
+.cardHeading {
+	margin: 0;
+	padding: 1rem 0;
+}
+
+.cardFooter {
+	background-color: #e5e5e5;
+	color: #0078aa;
+	text-align: center;
+}
+
+.footerContent {
+	margin: 0;
+	padding: 1rem 0;
+}

@@ -97,7 +97,7 @@ const SearchForm = (props) => {
 			<InputField fieldInfo={startDate} />
 			<InputField fieldInfo={endDate} />
             <InputField fieldInfo={budget} />
-            <button>Submit</button>
+            <button disabled={formIsValid}>Submit</button>
 		</form>
 	);
 };

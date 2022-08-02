@@ -1,5 +1,5 @@
 .homeBg{
-
+    overflow: hidden;
 }
 
 .triangle{
@@ -9,6 +9,7 @@
   border-top: 0;
   border-left: 0;
   border-right: 100vw solid #42C2FF;
+  overflow: hidden;
 }
 
 .formSection{

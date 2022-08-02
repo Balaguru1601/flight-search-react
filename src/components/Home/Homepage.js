@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import SearchForm from "../Form/SearchForm";
+import ResultCard from "../SearchResults/ResultCard";
 import HeroSection from "./HeroSection";
 import classes from "./Homepage.module.css";
 
@@ -16,7 +17,8 @@ const Home = (props) => {
 						alt=""
                     /> */}
                     <SearchForm></SearchForm>
-				</section>
+                </section>
+                    <ResultCard></ResultCard>
 			</div>
 		</Fragment>
 	);
