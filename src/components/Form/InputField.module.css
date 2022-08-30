@@ -1,7 +1,24 @@
-.inputField{
-
+.inputField {
+	display: flex;
+	margin: 0.5rem 0;
+	font-size: large;
 }
 
-.invalid{
-    border: solid 2px red;
+.inputField label {
+	display: inline-block;
+	width: 45%;
+	font-weight: 500;
+	padding-right: 0.5rem;
+}
+
+.invalid {
+	border: solid 2px red !important;
+	border-radius: 2px !important;
+}
+
+.inputField input {
+	background-color: #dbe2ef;
+	border: 1px solid;
+	border-radius: 2px;
+	font-size: medium;
 }

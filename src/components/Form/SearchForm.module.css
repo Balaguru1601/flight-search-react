@@ -1,0 +1,9 @@
+.inputForm {
+	padding: 2rem;
+	background-color: rgb(1, 1, 1, 0.2);
+	border-radius: 0.5rem;
+}
+
+.inputForm button {
+	float: right;
+}

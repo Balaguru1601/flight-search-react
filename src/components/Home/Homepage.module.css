@@ -1,27 +1,29 @@
-.homeBg{
-    overflow: hidden;
+.homeBg {
+	overflow: hidden;
 }
 
-.triangle{
-  width: 0;
-  height: 0;
-  border: 300px solid #EFFFFD;
-  border-top: 0;
-  border-left: 0;
-  border-right: 100vw solid #42C2FF;
-  overflow: hidden;
+.triangle {
+	width: 0;
+	height: 0;
+	border: 300px solid #effffd;
+	border-top: 0;
+	border-left: 0;
+	border-right: 100vw solid #42c2ff;
+	/* overflow: hidden; */
+	position: relative;
 }
 
-.formSection{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 10rem;
-    background-color: #EFFFFD;
+.formSection {
+	display: grid;
+	background-color: transparent;
+	position: absolute;
+	left: 50vw;
+	transform: translateX(-50%);
 }
 
-.flightGif{
-    max-width: 500px;
-    max-height: 500px;
-    position: absolute;
-    bottom: 10px;
+.flightGif {
+	max-width: 500px;
+	max-height: 500px;
+	position: absolute;
+	bottom: 10px;
 }

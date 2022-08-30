@@ -9,16 +9,17 @@ const Home = (props) => {
 		<Fragment>
 			<div className={classes.homeBg}>
 				<HeroSection></HeroSection>
-				<div className={classes.triangle}></div>
-				<section className={classes.formSection}>
-					{/* <img
+				<div className={classes.triangle}>
+					<section className={classes.formSection}>
+						{/* <img
 						src="./assets/images/flight.gif"
 						className={classes.flightGif}
 						alt=""
                     /> */}
-                    <SearchForm></SearchForm>
-                </section>
-                    <ResultCard></ResultCard>
+						<SearchForm></SearchForm>
+					</section>
+				</div>
+				<ResultCard></ResultCard>
 			</div>
 		</Fragment>
 	);
