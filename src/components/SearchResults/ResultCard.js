@@ -1,22 +1,47 @@
 import classes from "./ResultCard.module.css";
 
 const ResultCard = (props) => {
+	const { data } = props;
+	const arrivalDate = new Date(data.aTime * 1000)
+		.toLocaleDateString("en-GB")
+		.replaceAll("/", "-");
+	const departureDate = new Date(data.dTime * 1000)
+		.toLocaleDateString("en-GB")
+		.replaceAll("/", "-");
+
 	return (
 		<div className={classes.card}>
 			<div className={classes.cardHeader}>
-				<h1 className={classes.cardHeading}>Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
+				<h2 className={classes.cardHeading}>
+					From: {data.cityFrom}({data.flyFrom})
+				</h2>
+				<h2 className={classes.cardHeading2}>
+					To: {data.cityTo}({data.flyTo})
+				</h2>
 			</div>
-			<span className={classes.cardBody}>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Deleniti, voluptatibus. Sapiente dignissimos nisi molestiae
-					itaque eveniet quod iste tempora, delectus, impedit ducimus,
-					aperiam totam sequi cupiditate pariatur non exercitationem
-					esse.
-				</p>
-			</span>
+			<div className={classes.cardBody}>
+				<div className={classes.datesWrapper}>
+					<span> Departure: {departureDate}</span>
+					<span> Arrival: {arrivalDate}</span>
+				</div>
+				<div className={classes.descWrapper}>
+					<span> Duration: {data.fly_duration}</span>
+					<span>Cost: ₹ {data.price}</span>
+					<span>Seats Available: {data.availability.seats}</span>
+				</div>
+				<span className={classes.seatsAvailable}>
+					Seats availabile: {data.availability.seats}
+				</span>
+			</div>
 			<div className={classes.cardFooter}>
-				<h4 className={classes.footerContent}>Lorem ipsum dolor amet consectetur adip</h4>
+				<a
+					href={data.deep_link}
+					target="_blank"
+					rel="noreferrer"
+					className={classes.bookBtn}
+				>
+					Book Now
+				</a>
 			</div>
 		</div>
 	);

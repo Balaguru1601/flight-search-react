@@ -1,0 +1,49 @@
+.loader img {
+	position: relative;
+	width: 50%;
+	transform: translateX(50%);
+	max-width: 100%;
+	height: 100%;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 50vh;
+	transform: translateY(-50%);
+	z-index: 100;
+	overflow: hidden;
+	left: 25%;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+}
+
+.noOfSeats {
+	background-color: white;
+	padding: 0.5rem 1rem;
+	padding-top: 1rem;
+	border-radius: 1rem;
+}
+
+.closeBtn {
+	float: right;
+}
+
+.modalHeader {
+	height: max-content;
+	padding: 1rem 0.2rem;
+}
+
+@media (max-width: 987px) {
+	.modalOverlay {
+		width: 70%;
+		left: 15%;
+	}
+}
+
+@media (max-width: 720px) {
+	.modalOverlay {
+		width: 85%;
+		left: 7.5%;
+	}
+}

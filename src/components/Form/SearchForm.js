@@ -1,45 +1,20 @@
 import useInput from "../../Hooks/use-input";
 import moment from "moment";
 import InputField from "./InputField";
-import axios from "axios";
+import { Fragment, useState } from "react";
+import { getAirportCodes, sendRequest } from "../../utils/APIUtilities";
+import LoaderModal from "../Modals/Modal";
 
 import classes from "./SearchForm.module.css";
-import { Fragment } from "react";
 
 const SearchForm = (props) => {
-	const url = "https://tequila-api.kiwi.com";
 	let formIsValid = false;
 	const formData = {};
 
 	const validateString = (value) => value.trim() !== "";
 	const validateDate = (date) => moment(date, "DD-MM-YYYY", false).isValid();
 	const validateNumber = (num) => num > 0;
-
-	const getAirportCodes = async (city) => {
-		const response = await axios.get(url + "/locations/query", {
-			headers: {
-				apikey: "4Ed5su60sZbQoJYiYl8W_SYbWCY6SICs",
-			},
-			params: { term: city, location_type: "city" },
-		});
-		console.log(response.data);
-		return response.status === 200
-			? response.data.locations[0].code
-			: false;
-	};
-
-	const sendRequest = async (data) => {
-		const response = await axios.get(url + "/search", {
-			headers: {
-				apikey: "4Ed5su60sZbQoJYiYl8W_SYbWCY6SICs",
-			},
-			params: { ...data, curr: "INR", max_stopovers: 1 },
-		});
-		return {
-			success: response.status === 200,
-			data: response.data || {},
-		};
-	};
+	const [isLoading, setIsLoading] = useState(false);
 
 	const formSubmitHandler = async (event) => {
 		event.preventDefault();
@@ -51,13 +26,20 @@ const SearchForm = (props) => {
 			endDate.validities.isValid &&
 			budget.validities.isValid;
 
-		if (!formIsValid) return alert("Enter all the details!");
+		if (!formIsValid) {
+			fromField.properties.onBlur();
+			toField.properties.onBlur();
+			startDate.properties.onBlur();
+			endDate.properties.onBlur();
+			budget.properties.onBlur();
+			return;
+		}
+		setIsLoading((prevState) => true);
 
 		formData.fly_from = await getAirportCodes(fromField.properties.value);
 		formData.fly_to = await getAirportCodes(toField.properties.value);
 		if (!formData.fly_from || !formData.fly_to)
 			return alert("Enter valid destination cities!");
-		console.log(formData.fly_from);
 		formData.date_from = moment(startDate.properties.value).format(
 			"DD/MM/YYYY"
 		);
@@ -66,8 +48,11 @@ const SearchForm = (props) => {
 		);
 		formData.price_to = budget.properties.value;
 
-		const result = await sendRequest(formData);
-		console.log(result);
+		const response = await sendRequest(formData);
+		const resultData = response.data.data.filter(
+			(item) => item.availability.seats
+		);
+		props.onFormSubmit(resultData);
 	};
 
 	const fromField = useInput(
@@ -97,7 +82,7 @@ const SearchForm = (props) => {
 
 	return (
 		<Fragment>
-			{!formIsValid && (
+			{!isLoading && (
 				<form
 					method="get"
 					className={classes.inputForm}
@@ -111,6 +96,7 @@ const SearchForm = (props) => {
 					<button disabled={formIsValid}>Submit</button>
 				</form>
 			)}
+			{isLoading && <LoaderModal></LoaderModal>}
 		</Fragment>
 	);
 };

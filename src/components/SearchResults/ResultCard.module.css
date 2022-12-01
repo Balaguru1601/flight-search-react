@@ -1,6 +1,10 @@
+.allCards {
+	background-color: #effffd;
+}
+
 .card {
-    margin-top: 1rem;
-    margin-bottom: 4rem;
+	margin-top: 1rem;
+	margin-bottom: 4rem;
 	border: 2px solid #e5e5e5;
 	border-radius: 10px;
 	box-shadow: 0.5rem 0.5rem 0.5rem #d8d8d8;
@@ -8,26 +12,111 @@
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
+	transform: translateY(-100%);
+	transition: transform 500ms ease;
 }
 
 .cardHeader {
 	background-color: #0078aa;
 	color: #e5e5e5;
 	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	overflow: hidden;
 }
 
-.cardHeading {
-	margin: 0;
-	padding: 1rem 0;
+.cardBody {
+	background-color: white;
+}
+
+.datesWrapper,
+.descWrapper {
+	display: flex;
+	justify-content: space-around;
+	font-size: large;
+	font-weight: bold;
+	color: #0078aa;
+	padding: 1rem 0 0.5rem;
+}
+
+.seatsAvailable {
+	display: block;
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+	color: #0078aa;
+	padding: 0.5rem 0 0.5rem;
+	display: none;
 }
 
 .cardFooter {
-	background-color: #e5e5e5;
+	background-color: #d6e4e5;
 	color: #0078aa;
 	text-align: center;
+	padding: 1rem 0;
 }
 
-.footerContent {
-	margin: 0;
-	padding: 1rem 0;
+.bookBtn {
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	border: solid 1px #2ebdff;
+	border-radius: 10px;
+	color: #2ebdff;
+	font-size: large;
+	font-weight: 700;
+	background-color: #effffd;
+}
+
+.bookBtn:hover {
+	color: white;
+	background-color: #2ebdff;
+	transition: all 250ms ease;
+}
+
+@media (max-width: 900px) {
+	.card {
+		width: 80%;
+	}
+}
+
+@media (max-width: 600px) {
+	.card {
+		width: 90%;
+	}
+
+	.cardHeader {
+		display: block;
+	}
+
+	.cardHeading {
+		margin-left: 0;
+		text-align: center;
+	}
+
+	.cardHeading2 {
+		margin-right: 0;
+	}
+}
+
+@media (max-width: 550px) {
+	.descWrapper span:nth-child(3) {
+		display: none;
+	}
+
+	.seatsAvailable {
+		display: block;
+	}
+}
+
+@media (max-width: 450px) {
+	.descWrapper,
+	.datesWrapper {
+		display: block;
+	}
+
+	.datesWrapper span,
+	.descWrapper span {
+		display: block;
+		text-align: center;
+	}
 }
