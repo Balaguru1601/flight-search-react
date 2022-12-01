@@ -66,12 +66,12 @@ const SearchForm = (props) => {
 	);
 
 	const startDate = useInput(
-		{ type: "date", name: "startDate", label: "Departure" },
+		{ type: "date", name: "startDate", label: "Start date" },
 		validateDate
 	);
 
 	const endDate = useInput(
-		{ type: "date", name: "endDate", label: "Arrival" },
+		{ type: "date", name: "endDate", label: "End date" },
 		validateDate
 	);
 

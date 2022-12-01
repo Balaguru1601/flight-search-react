@@ -1,6 +1,5 @@
 import axios from "axios";
 const url = "https://tequila-api.kiwi.com";
-require("dotenv").config();
 
 export const getAirportCodes = async (city) => {
 	const response = await axios.get(url + "/locations/query", {
