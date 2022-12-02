@@ -120,3 +120,59 @@
 		text-align: center;
 	}
 }
+
+.card2 {
+	display: grid;
+	grid-template-columns: 1.2fr 1fr;
+}
+
+.cardContent1 {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.content1,
+.content2,
+.content3,
+.content4,
+.content5 {
+	display: grid;
+}
+
+.cardContent1 span,
+.cardContent2 span {
+	text-align: center;
+}
+
+.dday {
+}
+
+.dtime {
+}
+
+.dcode {
+}
+
+.duration {
+}
+
+.travelLine {
+}
+
+.travelType {
+}
+
+.aday {
+}
+
+.atime {
+}
+
+.acode {
+}
+
+.cardContent2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+}

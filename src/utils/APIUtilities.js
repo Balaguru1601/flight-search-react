@@ -8,6 +8,21 @@ export const getAirportCodes = async (city) => {
 		},
 		params: { term: city, location_type: "city" },
 	});
+
+	if (response.data.locations[0].code === null) {
+		console.log(response.data.locations[0].alternative_departure_points);
+		let min =
+			response.data.locations[0].alternative_departure_points[0].distance;
+		let min_item = {};
+		for (const departures of response.data.locations[0]
+			.alternative_departure_points) {
+			if (departures.distance < min) {
+				min = departures.distance;
+				min_item = departures;
+			}
+		}
+		return response.status === 200 ? min_item.id : false;
+	}
 	return response.status === 200 ? response.data.locations[0].code : false;
 };
 

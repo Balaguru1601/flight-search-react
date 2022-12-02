@@ -1,13 +1,14 @@
+import moment from "moment";
 import classes from "./ResultCard.module.css";
 
 const ResultCard = (props) => {
 	const { data } = props;
-	const arrivalDate = new Date(data.aTime * 1000)
-		.toLocaleDateString("en-GB")
-		.replaceAll("/", "-");
-	const departureDate = new Date(data.dTime * 1000)
-		.toLocaleDateString("en-GB")
-		.replaceAll("/", "-");
+	const arrival = new Date(data.aTime * 1000);
+	const departure = new Date(data.dTime * 1000);
+	const arrivalDate = moment(arrival).format("DD-MM-YYYY");
+	const departureDate = moment(departure).format("DD-MM-YYYY");
+	const arrivalTime = moment(arrival).format("LT");
+	const departureTime = moment(departure).format("LT");
 
 	return (
 		<div className={classes.card}>
