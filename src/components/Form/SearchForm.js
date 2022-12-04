@@ -38,7 +38,6 @@ const SearchForm = (props) => {
 
 		formData.fly_from = await getAirportCodes(fromField.properties.value);
 		formData.fly_to = await getAirportCodes(toField.properties.value);
-		console.log(formData.fly_from, formData.fly_to);
 		if (!formData.fly_from || !formData.fly_to)
 			return alert("Enter valid destination cities!");
 		formData.date_from = moment(startDate.properties.value).format(

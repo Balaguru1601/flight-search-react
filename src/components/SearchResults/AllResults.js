@@ -3,7 +3,6 @@ import classes from "./ResultCard.module.css";
 
 const AllResults = (props) => {
 	const { searchData } = props;
-	console.log(searchData);
 	const Cards = searchData.map((item) => {
 		return <ResultCard data={item} key={item.id} />;
 	});
