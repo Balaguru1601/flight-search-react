@@ -7,14 +7,14 @@ import classes from "./Homepage.module.css";
 const Home = (props) => {
 	const [formState, setFormState] = useState({
 		isFormSubmitted: false,
-		formData: [],
+		searchData: [],
 	});
 
-	const onFormSubmit = (formData) => {
+	const onFormSubmit = (searchData) => {
 		setFormState((prevState) => {
 			return {
 				isFormSubmitted: true,
-				formData: formData,
+				searchData: searchData,
 			};
 		});
 	};
@@ -39,7 +39,7 @@ const Home = (props) => {
 					</section>
 				</div>
 				{formState.isFormSubmitted && (
-					<AllResults formData={formState.formData} />
+					<AllResults searchData={formState.searchData} />
 				)}
 			</div>
 		</Fragment>
