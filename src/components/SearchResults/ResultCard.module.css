@@ -370,6 +370,13 @@
 		font-size: 1.3rem;
 	}
 
+	.travelLine .startPoint,
+	.travelLine .endPoint {
+		height: 5px;
+		width: 5px;
+		border: 1px solid #2c3333;
+	}
+
 	.aday,
 	.dday,
 	.duration {
