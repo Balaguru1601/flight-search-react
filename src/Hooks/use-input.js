@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import { useState } from "react";
 
 const useInput = (
@@ -7,7 +8,10 @@ const useInput = (
 	const [enteredValue, setEnteredValue] = useState("");
 	const [inpWasTouched, setInpwasTouched] = useState(false);
 
-	const valueIsValid = validationFunction(enteredValue);
+	const valueIsValid =
+		descriptors.type === "date" && descriptors.prevDate
+			? validationFunction(enteredValue, moment(descriptors.prevDate))
+			: validationFunction(enteredValue);
 	const valueIsInvalid = inpWasTouched && !valueIsValid;
 
 	const updateValue = (event) => {

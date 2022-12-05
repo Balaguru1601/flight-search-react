@@ -1,8 +1,10 @@
 .inputForm {
 	padding: 2rem;
-	background-color: rgb(1, 1, 1, 0.2);
+	background-color: rgb(1, 1, 1, 0.5);
 	border-radius: 0.5rem;
 	margin-top: 1rem;
+	color: white;
+	max-width: 100%;
 }
 
 .inputForm button {

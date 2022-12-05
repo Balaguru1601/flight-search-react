@@ -12,7 +12,9 @@ const SearchForm = (props) => {
 	const formData = {};
 
 	const validateString = (value) => value.trim() !== "";
-	const validateDate = (date) => moment(date, "DD-MM-YYYY", false).isValid();
+	const validateDate = (date, prev = moment()) =>
+		moment(date).format("DD-MM-YYYY") >= prev.format("DD-MM-YYYY");
+
 	const validateNumber = (num) => num > 0;
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -71,7 +73,12 @@ const SearchForm = (props) => {
 	);
 
 	const endDate = useInput(
-		{ type: "date", name: "endDate", label: "End date" },
+		{
+			type: "date",
+			name: "endDate",
+			label: "End date",
+			prevDate: startDate.properties.value,
+		},
 		validateDate
 	);
 
