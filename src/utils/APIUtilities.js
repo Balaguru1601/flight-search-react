@@ -21,6 +21,7 @@ export const getAirportCodes = async (city) => {
 				min_item = departures;
 			}
 		}
+		console.log(response);
 		return response.status === 200 ? min_item.id : false;
 	}
 	return response.status === 200 ? response.data.locations[0].code : false;

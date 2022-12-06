@@ -3,7 +3,7 @@ import moment from "moment";
 import InputField from "./InputField";
 import { Fragment, useState } from "react";
 import { getAirportCodes, sendRequest } from "../../utils/APIUtilities";
-import LoaderModal from "../Modals/Modal";
+import Modal from "../Modals/Modal";
 
 import classes from "./SearchForm.module.css";
 
@@ -17,6 +17,19 @@ const SearchForm = (props) => {
 
 	const validateNumber = (num) => num > 0;
 	const [isLoading, setIsLoading] = useState(false);
+	const [hasError, setHasError] = useState({ status: false, message: "" });
+
+	const closeErrorModal = () => {
+		setHasError((prev) => ({ status: false, message: "" }));
+	};
+
+	const resetForm = () => {
+		fromField.validities.reset();
+		toField.validities.reset();
+		startDate.validities.reset();
+		endDate.validities.reset();
+		budget.validities.reset();
+	};
 
 	const formSubmitHandler = async (event) => {
 		event.preventDefault();
@@ -37,24 +50,65 @@ const SearchForm = (props) => {
 			return;
 		}
 		setIsLoading((prevState) => true);
+		try {
+			formData.fly_from = await getAirportCodes(
+				fromField.properties.value
+			);
+			formData.fly_to = await getAirportCodes(toField.properties.value);
 
-		formData.fly_from = await getAirportCodes(fromField.properties.value);
-		formData.fly_to = await getAirportCodes(toField.properties.value);
-		if (!formData.fly_from || !formData.fly_to)
-			return alert("Enter valid destination cities!");
-		formData.date_from = moment(startDate.properties.value).format(
-			"DD/MM/YYYY"
-		);
-		formData.date_to = moment(endDate.properties.value).format(
-			"DD/MM/YYYY"
-		);
-		formData.price_to = budget.properties.value;
+			if (!formData.fly_from && !formData.fly_to) {
+				setIsLoading(false);
+				resetForm();
+				return setHasError({
+					status: true,
+					message: "Locations are invalid",
+				});
+			} else if (!formData.fly_from) {
+				setIsLoading(false);
+				resetForm();
+				return setHasError({
+					status: true,
+					message: "Start location is invalid",
+				});
+			} else if (!formData.fly_to) {
+				setIsLoading(false);
+				resetForm();
+				return setHasError({
+					status: true,
+					message: "Destination location is invalid",
+				});
+			}
 
-		const response = await sendRequest(formData);
-		const resultData = response.data.data.filter(
-			(item) => item.availability.seats
-		);
-		props.onFormSubmit(resultData);
+			formData.date_from = moment(startDate.properties.value).format(
+				"DD/MM/YYYY"
+			);
+			formData.date_to = moment(endDate.properties.value).format(
+				"DD/MM/YYYY"
+			);
+			formData.price_to = budget.properties.value;
+
+			const response = await sendRequest(formData);
+			const resultData = response.data.data.filter(
+				(item) => item.availability.seats
+			);
+			if (resultData.length === 0) {
+				setIsLoading(false);
+				resetForm();
+				return setHasError({
+					status: true,
+					message: "No deals available",
+				});
+			}
+
+			props.onFormSubmit(resultData);
+		} catch (error) {
+			setIsLoading(false);
+			resetForm();
+			return setHasError({
+				status: true,
+				message: "Start location is invalid",
+			});
+		}
 	};
 
 	const fromField = useInput(
@@ -89,21 +143,27 @@ const SearchForm = (props) => {
 
 	return (
 		<Fragment>
+			{hasError.status && (
+				<div className={classes.errorModalOverlay}>
+					<h4 className={classes.error}>{hasError.message}</h4>
+					<button onClick={closeErrorModal}>X</button>
+				</div>
+			)}
 			{!isLoading && (
 				<form
 					method="get"
 					className={classes.inputForm}
 					onSubmit={formSubmitHandler}
 				>
-					<InputField fieldInfo={fromField} />
-					<InputField fieldInfo={toField} />
+					<InputField fieldInfo={fromField} key={1} />
+					<InputField fieldInfo={toField} key={2} />
 					<InputField fieldInfo={startDate} />
 					<InputField fieldInfo={endDate} />
 					<InputField fieldInfo={budget} />
 					<button disabled={formIsValid}>Submit</button>
 				</form>
 			)}
-			{isLoading && <LoaderModal></LoaderModal>}
+			{isLoading && <Modal type="loader" />}
 		</Fragment>
 	);
 };

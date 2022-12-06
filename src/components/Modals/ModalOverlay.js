@@ -1,13 +1,14 @@
 import classes from "./ModalOverlay.module.css";
 
 const ModalOverlay = (props) => {
-	return (
-		<div className={classes.modalOverlay}>
-			<div className={classes.loader}>
-				<img src="./assets/images/loading.gif" alt="Loading..." />
+	if (props.type === "loader")
+		return (
+			<div className={classes.loaderModalOverlay}>
+				<div className={classes.loader}>
+					<img src="./assets/images/loading.gif" alt="Loading..." />
+				</div>
 			</div>
-		</div>
-	);
+		);
 };
 
 export default ModalOverlay;

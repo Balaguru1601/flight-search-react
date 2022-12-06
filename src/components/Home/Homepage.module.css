@@ -14,11 +14,12 @@
 }
 
 .formSection {
-	display: grid;
 	background-color: transparent;
-	position: absolute;
+	position: relative;
 	left: 50vw;
-	transform: translateX(-50%);
+	transform: translate(-50%, -300px);
+	display: inline-block;
+	z-index: 5;
 }
 
 .flightGif {
